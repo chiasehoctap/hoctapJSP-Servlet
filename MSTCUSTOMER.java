@@ -1,7 +1,7 @@
 /**
  * @(#)MSTCUSTOMER.java 2018/07/10
  *
- * Copyright(C) 2016 by FUJINET CO., LTD.
+ * Copyright(C) 2016 by 123456 CO., LTD.
  *
  * Last_Update 2018/07/10
  * Version 1.00.
@@ -11,7 +11,7 @@ package fjs.cs.dto;
 /**
  * Class MSTCUSTOMER 
  * 
- * @author QUANG_DUONGV
+ * @author name
  * @version 1.0
  */
 public class MSTCUSTOMER {
