@@ -1,7 +1,7 @@
 /**
  * @(#)T001_LoginServlet.java 2018/07/04.
  *
- * Copyright(C) 2016 by FUJINET CO., LTD.
+ * Copyright(C) 2016 by 123456 CO., LTD.
  *
  * Last_Update 2018/07/10.
  * Version 1.00.
@@ -26,7 +26,7 @@ import fjs.cs.dto.MSTUSER;
 /**
  * LoginServlet(Login)
  * 
- * @author QUANG-DUONGV
+ * @author name
  * @version 1.00
  * 
  */
