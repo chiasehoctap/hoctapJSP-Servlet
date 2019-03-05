@@ -1,0 +1,27 @@
+/**
+` * @(#)Constants.java 01-00 2018/07/02.
+ *
+ * Copyright(C) 2018 by FUJINET CO., LTD.
+ *
+ * Last_Update 2018/07/13
+ * Version 1.00.
+ */
+package fjs.cs.common;
+
+/**
+ * Class constant info
+ *
+ * @author QUANG_DUONGV
+ * @version 1.00
+ */
+public class Constants {
+
+	/* List Screen */
+	// T001(Login)
+	public static final String T001_LOGIN = "/WEB-INF/jsp/T001.jsp";
+	// T002(Search)
+	public static final String T002_SEARCH = "/WEB-INF/jsp/T002.jsp";
+	// T003(Edit)
+	public static final String T003_EDIT = "/WEB-INF/jsp/T003.jsp";
+	
+}
