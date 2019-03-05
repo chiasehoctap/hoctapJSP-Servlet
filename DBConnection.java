@@ -1,7 +1,7 @@
 /**
  * @(#)DBConnection.java 2018/07/04.
  *
- * Copyright(C) 2016 by FUJINET CO., LTD.
+ * Copyright(C) 2016 by 123456 CO., LTD.
  *
  * Last_Update 2018/07/10.
  * Version 1.00.
@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 /**
  * Class DBConnection create connection 
  * 
- * @author QUANG_DUONGV
+ * @author name
  * @version 1.0
  */
 public class DBConnection {
