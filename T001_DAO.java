@@ -1,7 +1,7 @@
 /**
  * @(#)T001_DAO.java 2019/03/05.
  *
- * Copyright(C) 2016 by FUJINET CO., LTD.
+ * Copyright(C) 2016 by 123456 CO., LTD.
  *
  * Last_Update 2018/07/13.
  * Version 1.00.
@@ -17,7 +17,7 @@ import fjs.cs.dto.MSTUSER;
 /**
  * T001_DAO
  * 
- * @author QUANG_DUONGV
+ * @author name
  * @version 1.0
  */
 public class T001_DAO {
