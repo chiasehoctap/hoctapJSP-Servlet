@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+   id="WebApp_ID" version="3.1">
+ 
+<welcome-file-list>
+ <welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+
+<servlet>
+ <servlet-name>T001_LoginServlet</servlet-name>
+ <servlet-class>fjs.cs.action.T001_LoginServlet</servlet-class>
+</servlet>
+ 
+<servlet-mapping>
+ <servlet-name>T001_LoginServlet</servlet-name>
+ <url-pattern>/T001_LoginServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+ <servlet-name>T002_SearchServlet</servlet-name>
+ <servlet-class>fjs.cs.action.T002_SearchServlet</servlet-class>
+</servlet>
+ 
+<servlet-mapping>
+ <servlet-name>T002_SearchServlet</servlet-name>
+ <url-pattern>/T002_SearchServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+ <servlet-name>T003_EditServlet</servlet-name>
+ <servlet-class>fjs.cs.action.T003_EditServlet</servlet-class>
+</servlet>
+ 
+<servlet-mapping>
+ <servlet-name>T003_EditServlet</servlet-name>
+ <url-pattern>/T003_EditServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+ <servlet-name>T002_DeleteServlet</servlet-name>
+ <servlet-class>fjs.cs.action.T002_DeleteServlet</servlet-class>
+</servlet>
+ 
+<servlet-mapping>
+ <servlet-name>T002_DeleteServlet</servlet-name>
+ <url-pattern>/T002_DeleteServlet</url-pattern>
+</servlet-mapping>
+
+</web-app>
