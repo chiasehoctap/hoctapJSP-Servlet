@@ -1,0 +1,115 @@
+/**
+ * @(#)T003_DAO.java 2018/07/04.
+ *
+ * Copyright(C) 2016 by FUJINET CO., LTD.
+ *
+ * Last_Update 2018/07/10.
+ * Version 1.00.
+ */
+package fis.cs.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import fjs.cs.dto.MSTCUSTOMER;
+
+/**
+ * T003_DAO
+ * 
+ * @author phuong-td
+ * @version 1.0
+ */
+public class T003_DAO {
+	
+	
+	/**
+     * search MSTCUSTOMER info with CUSTOMER_ID
+     * 
+     * @param dbURL: database's url
+     * @param userName: username is used to login
+     * @param password: password is used to login
+     * @return connection
+     */
+	public static MSTCUSTOMER findMSTCUSTOMER(Connection conn, String CUSTOMER_ID) {
+		MSTCUSTOMER user = new MSTCUSTOMER();
+		PreparedStatement pstm = null;
+		//query sentences
+		String sql ="SELECT * FROM MSTCUSTOMER WHERE DELETE_YMD IS NULL";
+		if(CUSTOMER_ID.equalsIgnoreCase("") == false){
+			sql = sql + " AND CUSTOMER_ID = "+CUSTOMER_ID;
+		}	
+		try {
+			pstm = conn.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				user.setCUSTOMER_ID(rs.getInt(1));
+				user.setCUSTOMER_NAME(rs.getString(2));
+				user.setSEX(rs.getString(3));
+				user.setBIRTHDAY(rs.getString(4));
+				user.setEMAIL(rs.getString(5));
+				user.setADDRESS(rs.getString(6));
+			}
+		} catch (Exception ex) {
+			//print error
+			String error = ex.getMessage();
+			System.out.println("Error: " + error);
+		}
+		return user;
+	}
+		
+	/**
+     * Add MSTCUSTOMER  
+     * 
+     *@param CUSTOMER_NAME: CUSTOMER_NAME info
+     * @param SEX: SEX info 
+     * @param BIRTHDAY: BIRTHDAY info
+     * @param  ADRESS: ADDRESS info
+     * @param PSN_CD: PSSN_CD info
+     * @return result 
+     */
+	public static int addMSTCUSTOMER(Connection conn, String CUSTOMER_NAME, String SEX, String BIRTHDAY, String EMAIL, String ADDRESS, String PSN_CD) {
+		//set default value to return is error
+		int result = -1;
+		PreparedStatement pstm = null;
+		// query sentences
+		String sql = "Insert into MSTCUSTOMER(CUSTOMER_NAME, SEX, BIRTHDAY, EMAIL, ADDRESS, DELETE_YMD, INSERT_YMD, INSERT_PSN_CD, UPDATE_YMD, UPDATE_PSN_CD) values ('"+CUSTOMER_NAME+"', '"+SEX+"', '"+BIRTHDAY+"','"+EMAIL+"', '"+ADDRESS+"',  null, getdate(), "+PSN_CD+", getdate(), "+PSN_CD+");" ;
+		try {
+			pstm = conn.prepareStatement(sql);
+			result = pstm.executeUpdate();	
+		} catch (Exception ex) {
+			//print error
+			String error = ex.getMessage();
+			System.out.println("Error: " + error);
+		}
+		return result;
+	}
+	
+	/**
+     * Edit MSTCUSTOMER  
+     * 
+     * @param CUSTOMER_NAME: CUSTOMER_NAME info
+     * @param SEX: SEX info 
+     * @param BIRTHDAY: BIRTHDAY info
+     * @param  ADRESS: ADDRESS info
+     * @param PSN_CD: PSSN_CD info
+     * @param CUSTOMER_ID: CUSTOMER_ID info 
+     * @return result
+     */
+	public static int editMSTCUSTOMER(Connection conn, String CUSTOMER_NAME, String SEX, String BIRTHDAY, String EMAIL, String ADDRESS, String PSN_CD, String CUSTOMER_ID) {
+		//set default value to return is error
+		int result = -1;
+		PreparedStatement pstm = null;
+		// query sentences
+		String sql = "UPDATE MSTCUSTOMER SET CUSTOMER_NAME = '"+CUSTOMER_NAME+"', SEX = '"+SEX+"', BIRTHDAY = '"+BIRTHDAY+"', EMAIL = '"+EMAIL+"', ADDRESS = '"+ADDRESS+"', UPDATE_YMD = getdate(), UPDATE_PSN_CD = "+PSN_CD+" WHERE CUSTOMER_ID = " + CUSTOMER_ID ;
+		try {
+			pstm = conn.prepareStatement(sql);
+			result = pstm.executeUpdate();
+		} catch (Exception ex) {
+			//print error
+			String error = ex.getMessage();
+			System.out.println("Error: " + error);
+		}
+		return result;
+	}
+}
