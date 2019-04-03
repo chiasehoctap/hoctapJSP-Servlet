@@ -1,0 +1,33 @@
+package fjs.cs.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import fjs.cs.dto.MSTCUSTOMER;
+
+public class T002_PreAction extends Action {
+@Override
+public ActionForward execute(ActionMapping mapping, ActionForm form,
+		HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+	// TODO Auto-generated method stub
+	
+	List<MSTCUSTOMER> list = null;
+	list = (List<MSTCUSTOMER>) request.getAttribute("listCustomer");
+	
+	request.setAttribute("maxpageid", request.getAttribute("maxpageid"));
+	//current page
+	request.setAttribute("stt", request.getAttribute("stt"));
+	//System.out.println("curreny page: " + request.getAttribute("stt"));
+	request.setAttribute("listCustomer", list);
+	
+	return mapping.findForward("success");
+}
+}
