@@ -1,0 +1,184 @@
+<%@ taglib uri="/tags/struts-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+
+<%@ page import="fjs.cs.dto.MSTCUSTOMER" %>	
+<%@ page import="java.lang.Integer" %>
+<%@ page import="java.lang.String" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Edit - Training</title>
+<link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<div class="contentpage">
+	<h1 id="title1">Training</h1>
+	<hr />
+	<div class="parent">
+		<div class="bar">
+		 	<span class="left"><a href="/Struts-Project2/">Login</a> &gt;Search Customer &gt; Edit Customer Info </span>
+		</div>
+	
+		<div>
+			<span class="left" style="display: block">Welcome <bean:write name="mstUserBean" property="userName"></bean:write>
+				</span> <a href="/Struts-Project2/" class="logout" id="lblLogOut">Log Out</a>
+		</div>
+	
+	<div id="blue2">Edit</div>
+	
+	</div>
+	<div class="edit">
+		
+		<html:form action="edit" method="post" onsubmit="return myFunction()" styleId="formEdit">
+			<h1 id="error3"></h1>
+			<div class="relative">
+		<%
+				
+				MSTCUSTOMER l = (MSTCUSTOMER) request.getAttribute("customer");
+				int id = l.getCUSTOMER_ID(); 
+			%>
+			Customer ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <%=id != 0 ? id : ""%>
+			
+			<br/><br/>
+		
+			Customer name:&nbsp;&nbsp;
+			<html:text name="EditBean" property="txtCustomerName" styleClass="inputdata3" maxlength="50" styleId="txtCustomerName" />
+			<br/>
+			<br/>
+			Sex &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+				<html:select name="EditBean"  property="cboSex" styleId="cboSex" styleClass="inputdata4" > 
+						<html:option value="">&nbsp;</html:option>
+						<html:option value="0">Male</html:option>
+						<html:option value="1">Female</html:option>
+						
+				</html:select>
+				<br/>
+				<br/>
+				
+				Birthday:&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<html:text name="EditBean" property="txtBirthday" maxlength="10" styleId="txtBirthday" styleClass="inputdata4" />
+				
+				<br/>
+				<br/>
+				Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<html:text name="EditBean" property="txtEmail" maxlength="40" styleId="txtEmail" styleClass="inputdata5" />
+				<br/>
+				<br/>
+				Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+				<html:textarea name="EditBean" property="txtAddress" styleId="txtAddress" styleClass="inputdata3" cols="4" rows="5"></html:textarea>
+				<br/>
+				<br/>	
+				<div class="container2">
+				 
+				  <div class="bottomleft ">
+				 		<script>
+
+						var edit = function ()
+						{
+							document.getElementById("click").value = "1";							
+							
+						   	return myFunction();
+						}
+					</script>
+						<html:hidden name="EditBean" property="customerID" value="${EditBean.customerID}" />
+						<%
+							String status = (String)request.getAttribute("status");
+						%>
+						<html:hidden name="EditBean" property="status" value="<%= status%>" />
+						
+						<html:hidden name="EditBean" property="PSN_CD" value="${mstUserBean.PSN_CD}" />
+						<html:submit property="mode" value="Save" styleId="btnSave" onclick=" return edit()" styleClass="button"></html:submit>
+				  </div>
+				  <div class="bottomright "><button onclick="return clearAll()" class="button" id="">Clear</button></div>
+				 
+				</div>
+			</div>
+			</html:form>
+	
+		</div>
+
+		<script>
+			var clearAll = function() {
+				document.getElementById("error3").innerHTML = "";
+				document.getElementById("txtBirthday").value = "";
+				document.getElementById("txtCustomerName").value = "";
+				document.getElementById("txtEmail").value = "";
+				document.getElementById("txtAddress").value = "";
+				document.getElementById("cboSex").selectedIndex = 0;
+				
+				return false;
+			}
+		</script>
+		<div class="fixed">
+		<hr />
+		<p ><span class="left">&nbsp;&nbsp;&nbsp;&nbsp;Copyright(c) 2000-2008 FUJINET, All Rights Reserved.</span></p>
+	</div>
+	</div>
+	
+<script>
+	var myFunction = function () {
+		
+		var txtUserID = document.getElementById("txtCustomerName").value;
+		var check = 0;
+		if(txtUserID == 0){
+			document.getElementById("error3").innerHTML = ('顧客名を入力してください。');
+			check = 1;
+			return false;
+		}
+		var txtBirthdayFrom = document.getElementById("txtBirthday").value;
+		
+		//if birthdayfrom is empty is empty
+    	 regularExpression = /^(19[5-9][0-9]|20[0-4][0-9]|2050)[/](0[1-9]|1[0-2])[/](0[1-9]|[12][0-9]|3[01])$/;
+    	 var form = document.getElementById("formEdit");
+    	   if(form.txtBirthday.value != '' && !form.txtBirthday.value.match(regularExpression)) {
+    		   document.getElementById("error3").innerHTML = ('誕生日が不正です');
+	    		check = 2;
+	    		return false;
+    	     
+    	   }
+    	   if(form.txtBirthday.value == '' ) {
+    		   document.getElementById("error3").innerHTML = ('誕生日が不正です');
+	    		check = 2;
+	    		return false;
+    	     
+    	   }
+    	var inputText = document.getElementById("txtEmail");
+    	var length = document.getElementById("txtEmail").value;
+    	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    	if(length == 0) {
+    		document.getElementById("error3").innerHTML = ('メールアドレスが不正です。');
+        	return false;
+    	}
+    	if(!inputText.value.match(mailformat))
+    	{
+    		document.getElementById("error3").innerHTML = ('メールアドレスが不正です。');
+    		return false;
+    	}
+		if(check != 0) {
+			return false;
+		} else {
+			var form = document.getElementById("formEdit");
+		   	form.submit();
+		}
+   	    return true;
+	};
+
+</script>
+</body>
+</html>
