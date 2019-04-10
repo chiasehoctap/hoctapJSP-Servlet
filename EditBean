@@ -1,0 +1,73 @@
+package fjs.cs.bean;
+
+import org.apache.struts.action.ActionForm;
+
+public class EditBean extends ActionForm{
+	private String txtCustomerName = "";
+	private String cboSex = "";
+	private String txtBirthday = "";
+	private String mode = "";
+	private String customerID = "0";
+	private String txtEmail = "";
+	private String txtAddress = "";
+	private String status = "";
+	private String PSN_CD = "";
+
+	public EditBean(){
+		
+	}
+	public String getTxtCustomerName() {
+		return txtCustomerName;
+	}
+	public void setTxtCustomerName(String txtCustomerName) {
+		this.txtCustomerName = txtCustomerName;
+	}
+	public String getCboSex() {
+		return cboSex;
+	}
+	public void setCboSex(String cboSex) {
+		this.cboSex = cboSex;
+	}
+	public String getTxtBirthday() {
+		return txtBirthday;
+	}
+	public void setTxtBirthday(String txtBirthday) {
+		this.txtBirthday = txtBirthday;
+	}
+	public String getMode() {
+		return mode;
+	}
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+	public String getCustomerID() {
+		return customerID;
+	}
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+	public String getTxtEmail() {
+		return txtEmail;
+	}
+	public void setTxtEmail(String txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+	public String getTxtAddress() {
+		return txtAddress;
+	}
+	public void setTxtAddress(String txtAddress) {
+		this.txtAddress = txtAddress;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getPSN_CD() {
+		return PSN_CD;
+	}
+	public void setPSN_CD(String pSN_CD) {
+		PSN_CD = pSN_CD;
+	}
+}
