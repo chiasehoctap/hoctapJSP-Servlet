@@ -1,0 +1,39 @@
+package fjs.cs.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import fjs.cs.bean.EditBean;
+import fjs.cs.dto.MSTCUSTOMER;
+
+public class T003_PreAction extends Action{
+@Override
+public ActionForward execute(ActionMapping mapping, ActionForm form,
+		HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+	EditBean customerForm = (EditBean) form;
+	
+	//if click add new in T002.jsp or when you click save to add successfully
+	if("Add new".equalsIgnoreCase(customerForm.getMode()) == true || "0".equalsIgnoreCase(customerForm.getCustomerID()) == true) {
+			customerForm.setCustomerID("0");
+			customerForm.setCboSex("");
+			customerForm.setTxtCustomerName("");
+			customerForm.setTxtAddress("");
+			customerForm.setTxtBirthday("");
+			customerForm.setTxtEmail("");
+			request.setAttribute("status", "add");
+			
+			// find MSTCUSTOMER
+			MSTCUSTOMER customer = new MSTCUSTOMER();
+			if (customer != null) {
+				request.setAttribute("customer", customer);
+			}
+	}
+	return mapping.findForward("success");
+}
+}
