@@ -1,0 +1,62 @@
+package fjs.cs.action;
+
+import java.sql.Connection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+import fjs.cs.dao.T003_DAO;
+import fjs.cs.db.DBConnection;
+import fjs.cs.bean.EditBean;
+import fjs.cs.dto.MSTCUSTOMER;
+
+public class T003_Action extends Action{
+@Override
+public ActionForward execute(ActionMapping mapping, ActionForm form,
+		HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+		EditBean customerForm = (EditBean) form;
+		
+		request.setAttribute("status", "edit");
+		
+		Connection conn = DBConnection.createConnection();
+		
+		//System.out.println("PSNCD: " + customerForm.getPSN_CD());
+		if ("edit".equalsIgnoreCase(customerForm.getStatus()) == true) {
+			System.out.println(customerForm.getTxtCustomerName()+ " - " + customerForm.getCboSex()+ " - " + customerForm.getTxtBirthday()+ " - " + customerForm.getTxtEmail()+ " - " + customerForm.getTxtAddress()+ " - " + customerForm.getPSN_CD()+ " - " +customerForm.getCustomerID());
+			//T003_DAO.editMSTCUSTOMER(conn, customerForm.getTxtCustomerName(), customerForm.getCboSex(), customerForm.getTxtBirthday(), customerForm.getTxtEmail(), customerForm.getTxtAddress(), customerForm.getPSN_CD(),customerForm.getCustomerID());
+			
+			// find MSTCUSTOMER
+			MSTCUSTOMER customer = T003_DAO.findMSTCUSTOMER(conn, customerForm.getCustomerID());
+			if (customer != null) {
+				request.setAttribute("customer", customer);
+				customerForm.setCustomerID(String.valueOf(customer.getCUSTOMER_ID()));
+				customerForm.setCboSex(customer.getSEX());
+				customerForm.setTxtBirthday(customer.getBIRTHDAY());
+				customerForm.setTxtEmail(customer.getEMAIL());
+				customerForm.setTxtAddress(customer.getADDRESS());
+				customerForm.setTxtCustomerName(customer.getCUSTOMER_NAME());
+
+			}
+		} else if ("add".equalsIgnoreCase(customerForm.getStatus()) == true) {
+			System.out.println(customerForm.getTxtCustomerName()+ " - " + customerForm.getCboSex()+ " - " + customerForm.getTxtBirthday()+ " - " + customerForm.getTxtEmail()+ " - " + customerForm.getTxtAddress()+ " - " + customerForm.getPSN_CD()+ " - " +customerForm.getCustomerID());
+			// T003_DAO.addMSTCUSTOMER(conn,customerForm.getTxtCustomerName(),
+			// customerForm.getCboSex(), customerForm.getTxtBirthday(),
+			// customerForm.getTxtEmail(), customerForm.getTxtAddress(),
+			// customerForm.getPSN_CD());
+			// find MSTCUSTOMER
+			MSTCUSTOMER customer = new MSTCUSTOMER();
+			if (customer != null) {
+				request.setAttribute("customer", customer);
+
+			}
+		}
+		
+	return mapping.findForward("preaction");
+}
+}
